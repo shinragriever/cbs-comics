@@ -60,7 +60,11 @@
 <script>
 import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
+import Comic from "../../models/Comic";
+import Author from "../../models/Author";
 
+import Serie from "../../models/Serie";
+import Publisher from "../../models/Publisher";
 export default {
   name: "AdminTables",
   components: {},
@@ -79,6 +83,17 @@ export default {
         { text: "Actions", value: "name", sortable: false }
       ]
     };
+  },
+  computed: {
+    allAuthors() {
+      return Author.query().all();
+    },
+    allSeries() {
+      return Serie.query().all();
+    },
+    allPublishers() {
+      return Publisher.query().all();
+    }
   }
 };
 </script>

@@ -8166,6 +8166,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _models_Comic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/Comic */ "./resources/js/models/Comic.js");
+/* harmony import */ var _models_Author__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Author */ "./resources/js/models/Author.js");
+/* harmony import */ var _models_Serie__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/Serie */ "./resources/js/models/Serie.js");
+/* harmony import */ var _models_Publisher__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/Publisher */ "./resources/js/models/Publisher.js");
 //
 //
 //
@@ -8225,6 +8229,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
+
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -8250,6 +8258,17 @@ __webpack_require__.r(__webpack_exports__);
         sortable: false
       }]
     };
+  },
+  computed: {
+    allAuthors: function allAuthors() {
+      return _models_Author__WEBPACK_IMPORTED_MODULE_3__["default"].query().all();
+    },
+    allSeries: function allSeries() {
+      return _models_Serie__WEBPACK_IMPORTED_MODULE_4__["default"].query().all();
+    },
+    allPublishers: function allPublishers() {
+      return _models_Publisher__WEBPACK_IMPORTED_MODULE_5__["default"].query().all();
+    }
   }
 });
 
@@ -67955,14 +67974,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************!*\
   !*** ./resources/js/admin/views/AdminTables.vue ***!
   \**************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdminTables_vue_vue_type_template_id_5adf9bf6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AdminTables.vue?vue&type=template&id=5adf9bf6&scoped=true& */ "./resources/js/admin/views/AdminTables.vue?vue&type=template&id=5adf9bf6&scoped=true&");
 /* harmony import */ var _AdminTables_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminTables.vue?vue&type=script&lang=js& */ "./resources/js/admin/views/AdminTables.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _AdminTables_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _AdminTables_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -67992,7 +68012,7 @@ component.options.__file = "resources/js/admin/views/AdminTables.vue"
 /*!***************************************************************************!*\
   !*** ./resources/js/admin/views/AdminTables.vue?vue&type=script&lang=js& ***!
   \***************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

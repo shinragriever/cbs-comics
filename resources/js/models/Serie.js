@@ -45,7 +45,7 @@ export default class Serie extends Model {
           $update: {
             name: 'update',
             http: {
-              url: '/:id',
+              url: '/api/publishers/:id',
               method: 'put',
             },
           },

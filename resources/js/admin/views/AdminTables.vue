@@ -25,7 +25,7 @@
               <td>{{ props.item.id }}</td>
               <td class="text-xs-right">{{ props.item.name }}</td>
               <td class="justify-center layout px-0">
-                <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
+                <EditComponent :modelName="author" :item="props.item"  @update="authorEdit"></EditComponent>
                 <v-icon small @click="deleteItem(props.item)">delete</v-icon>
               </td>
             </v-data-table>
@@ -42,7 +42,7 @@
               <td>{{ props.item.id }}</td>
               <td class="text-xs-right">{{ props.item.name }}</td>
               <td class="justify-center layout px-0">
-                <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
+                <EditComponent :modelName="serie" :item="props.item"  @update="serieEdit"></EditComponent>
                 <v-icon small @click="deleteItem(props.item)">delete</v-icon>
               </td>
             </v-data-table>
@@ -59,7 +59,7 @@
               <td>{{ props.item.id }}</td>
               <td class="text-xs-right">{{ props.item.name }}</td>
               <td class="justify-center layout px-0">
-                <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon>
+                <EditComponent :modelName="publisher" :item="props.item" @update="publisherEdit"></EditComponent>
                 <v-icon small @click="deleteItem(props.item)">delete</v-icon>
               </td>
             </v-data-table>
@@ -76,10 +76,11 @@ import Author from "../../models/Author";
 import Serie from "../../models/Serie";
 import Publisher from "../../models/Publisher";
 import Create from "../components/Create";
+import EditComponent from "../components/EditComponent";
 export default {
   name: "AdminTables",
   components: {
-    Create
+    Create, EditComponent
   },
   data() {
     return {
@@ -108,15 +109,24 @@ export default {
     }
   },
   methods: {
-    authorCreate(event) {
-      Author.$create({ data: event });
+    authorCreate(data) {
+      Author.$create({data});
     },
-    serieCreate(event) {
-      Serie.$create({ data: event });
+    serieCreate(data) {
+      Serie.$create({data});
     },
-    publisherCreate(event) {
-      Publisher.$create({ data: event });
-    }
+    publisherCreate(data) {
+      Publisher.$create({data});
+    },
+    authorEdit(data){
+     Author.$update({params: {id:data.id},  data: {name: data.name} });
+    },
+    serieEdit(data){
+      Serie.$update({params: {id:data.id},  data: {name: data.name} });
+    },
+    publisherEdit(data){ 
+      Publisher.$update({params: {id:data.id},  data: {name: data.name} });
+    },
   }
 };
 </script>

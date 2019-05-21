@@ -40,7 +40,8 @@ class AuthorController extends Controller
      */
     public function show($id)
     {
-        //
+        $author = Author::findOrFail($id);
+        return response($author);
     }
 
     /**
@@ -52,7 +53,14 @@ class AuthorController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $author = Author::findOrFail($id);
+        $author->update($request->all());
+
+        return response($author);
+        
+
+       
+
     }
 
     /**

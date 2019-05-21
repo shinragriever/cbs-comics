@@ -77,9 +77,9 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :disabled="!valid" color="success" @click="submit(comic)">Submit</v-btn>
+        <v-btn :disabled="!valid" color="success" @click="submit()">Submit</v-btn>
 
-        <v-btn color="error" @click="reset">Reset Form</v-btn>
+        
 
         <v-btn color="warning" @click.stop="dialog = false">Cancel</v-btn>
       </v-card-actions>
@@ -88,7 +88,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+
 import Comic from "../../models/Comic";
 import Author from "../../models/Author";
 
@@ -98,22 +98,17 @@ export default {
   name: "ComicCreateComponent",
   data() {
     return {
-      comic: {
-        id: comic.id,
-        title: comic.title,
-        description: comic.description,
-        author: comic.author.name,
-        serie: comic.serie.name,
-        publisher: comic.publisher.name,
-        publishyear: comic.publishyear,
-        publisher_id: comic.publisher_id,
-        author_id: comic.author_id,
-        serie_id: comic.serie_id,
-        stock: comic.stock,
-        price: comic.price
-      },
+      
       dialog: false,
-
+      id: this.item.id,
+      title: this.item.title,
+      description: this.item.description,
+      publishyear: this.item.publishyear,
+      publisher_id: this.item.publisher_id,
+      author_id: this.item.author_id,
+      serie_id: this.item.serie_id,
+      stock: this.item.stock,
+      price: this.item.price,
       valid: true,
       priceRules: [v => !!v || "Price is required"],
       stockRules: [v => !!v || "Stock is required"],
@@ -125,17 +120,21 @@ export default {
       ]
     };
   },
+ 
+
+  props: {
+      item: {
+          type: Object,
+          required: true
+      },
+      modelName: {
+          type: String,
+          required: false,  
+      },
+  
+  },
+
   computed: {
-    ...mapGetters({
-      comicsLoading: "entities/comics/loading",
-      authorsLoading: "entities/authors/loading",
-      seriesLoading: "entities/series/loading",
-      publishersLoading: "entities/publishers/loading",
-      comicsErrors: "entities/comics/errors",
-      authorsErrors: "entities/authors/errors",
-      seriesErrors: "entities/series/errors",
-      publishersErrors: "entities/publishers/errors"
-    }),
     getAuthors() {
       return Author.query().all();
     },
@@ -146,11 +145,11 @@ export default {
       return Publisher.query().all();
     }
   },
-  created() {},
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
-        const newComic = {
+         const updateSubmit = {
+          id: this.item.id,
           title: this.title,
           description: this.description,
           publishyear: this.publishyear,
@@ -158,21 +157,26 @@ export default {
           author_id: this.author_id,
           serie_id: this.serie_id,
           stock: this.stock,
-          price: this.price
+          price: this.price,
         };
-        console.log(newComic);
-        Comic.$update({ data: newComic });
+        
+          this.$emit("update", updateSubmit);
+        
+       
         this.dialog = false;
-        this.$refs.form.reset();
-      }
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
+      };
+      },
+    
+   
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+      cancel() {
+      
+      this.dialog = false;
     }
   },
+  
   mounted() {}
 };
 </script>

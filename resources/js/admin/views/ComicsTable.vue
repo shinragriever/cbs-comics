@@ -20,11 +20,11 @@
         <td class="text-xs-right">{{ comic.item.price}}</td>
         <td class="text-xs-right">{{ comic.item.stock}}</td>
         <td class="justify-center layout px-0">
-          <!-- <v-icon small class="mr-2" @click="editComic(comic.item.id)">edit</v-icon> -->
+          
 
-          <v-btn @click="console(comic.item)">Console Log</v-btn>
-          <comic-edit-component :comic="comic.item"></comic-edit-component>
-          <v-icon small @click="deleteItem(comic.item.id)">delete</v-icon>
+          
+          <comic-edit-component :item="comic.item" @update="comicEdit"></comic-edit-component>
+          <v-icon small >delete</v-icon>
         </td>
       </template>
     </v-data-table>
@@ -79,10 +79,17 @@ export default {
   mounted() {},
 
   methods: {
-    editComic() {},
-    console(comic) {
-      console.log(comic);
-    }
+     comicEdit(data){
+     Comic.$update({params: {id:data.id},  data: { 
+          title: data.title,
+          description: data.description,
+          publishyear: data.publishyear,
+          publisher_id: data.publisher_id,
+          author_id: data.author_id,
+          serie_id: data.serie_id,
+          stock: data.stock,
+          price: data.price,} });
+    },
   },
 
   mounted() {

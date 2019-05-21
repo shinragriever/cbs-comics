@@ -46,7 +46,7 @@ export default class Author extends Model {
           $update: {
             name: 'update',
             http: {
-              url: '/:id',
+              url: '/api/authors/:id',
               method: 'put',
             },
           },

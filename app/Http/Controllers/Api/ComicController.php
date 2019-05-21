@@ -24,4 +24,10 @@ class ComicController extends Controller
 
         return response($newComic);
     }
+    public function update(Request $request, $id){
+        $comic = Comic::findOrFail($id);
+        $comic->update($request->all());
+
+        return response($comic);
+    }
 }

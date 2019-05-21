@@ -61,7 +61,7 @@ export default class Comic extends Model {
           $update: {
             name: 'update',
             http: {
-              url: '/:id',
+              url: '/api/comics/:id',
               method: 'put',
             },
           },

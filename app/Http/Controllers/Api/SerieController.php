@@ -51,7 +51,10 @@ class SerieController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $serie = Serie::findOrFail($id);
+        $serie->update($request->all());
+
+        return response($serie);
     }
 
     /**

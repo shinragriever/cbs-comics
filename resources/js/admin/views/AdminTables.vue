@@ -72,7 +72,6 @@
 <script>
 import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
-import Comic from "../../models/Comic";
 import Author from "../../models/Author";
 import Serie from "../../models/Serie";
 import Publisher from "../../models/Publisher";
@@ -85,15 +84,8 @@ export default {
   data() {
     return {
       title: "Admin Tables",
-      dialog: false,
-      error: null,
-      meta: null,
       response: "",
-      comics: [],
       author: "Author",
-      authors: "authors",
-      series: "series",
-      publishers: "publishers",
       serie: "Serie",
       publisher: "Publisher",
 
@@ -117,15 +109,12 @@ export default {
   },
   methods: {
     authorCreate(event) {
-      console.log("test", event);
       Author.$create({ data: event });
     },
     serieCreate(event) {
-      console.log("test", event);
       Serie.$create({ data: event });
     },
     publisherCreate(event) {
-      console.log("test", event);
       Publisher.$create({ data: event });
     }
   }

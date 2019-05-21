@@ -8240,10 +8240,6 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _models_Comic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../models/Comic */ "./resources/js/models/Comic.js");
-/* harmony import */ var _models_Author__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/Author */ "./resources/js/models/Author.js");
-/* harmony import */ var _models_Serie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Serie */ "./resources/js/models/Serie.js");
-/* harmony import */ var _models_Publisher__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/Publisher */ "./resources/js/models/Publisher.js");
 //
 //
 //
@@ -8273,19 +8269,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
-
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Create",
   props: {
     modelName: {
-      type: String,
-      required: false
-    },
-    table: {
       type: String,
       required: false
     }
@@ -8297,8 +8285,7 @@ __webpack_require__.r(__webpack_exports__);
       valid: true,
       nameRules: [function (v) {
         return !!v || "Name is required";
-      }],
-      model: "authors"
+      }]
     };
   },
   computed: {},
@@ -8319,6 +8306,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     resetValidation: function resetValidation() {
       this.$refs.form.resetValidation();
+    },
+    cancel: function cancel() {
+      this.$refs.form.reset();
+      this.dialog = false;
     }
   },
   mounted: function mounted() {}
@@ -8563,11 +8554,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _models_Comic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/Comic */ "./resources/js/models/Comic.js");
-/* harmony import */ var _models_Author__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Author */ "./resources/js/models/Author.js");
-/* harmony import */ var _models_Serie__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/Serie */ "./resources/js/models/Serie.js");
-/* harmony import */ var _models_Publisher__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../models/Publisher */ "./resources/js/models/Publisher.js");
-/* harmony import */ var _components_Create__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../components/Create */ "./resources/js/admin/components/Create.vue");
+/* harmony import */ var _models_Author__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../models/Author */ "./resources/js/models/Author.js");
+/* harmony import */ var _models_Serie__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../models/Serie */ "./resources/js/models/Serie.js");
+/* harmony import */ var _models_Publisher__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../models/Publisher */ "./resources/js/models/Publisher.js");
+/* harmony import */ var _components_Create__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../components/Create */ "./resources/js/admin/components/Create.vue");
 //
 //
 //
@@ -8639,7 +8629,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 
@@ -8649,20 +8638,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AdminTables",
   components: {
-    Create: _components_Create__WEBPACK_IMPORTED_MODULE_6__["default"]
+    Create: _components_Create__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   data: function data() {
     return {
       title: "Admin Tables",
-      dialog: false,
-      error: null,
-      meta: null,
       response: "",
-      comics: [],
       author: "Author",
-      authors: "authors",
-      series: "series",
-      publishers: "publishers",
       serie: "Serie",
       publisher: "Publisher",
       headers: [{
@@ -8680,31 +8662,28 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     allAuthors: function allAuthors() {
-      return _models_Author__WEBPACK_IMPORTED_MODULE_3__["default"].query().all();
+      return _models_Author__WEBPACK_IMPORTED_MODULE_2__["default"].query().all();
     },
     allSeries: function allSeries() {
-      return _models_Serie__WEBPACK_IMPORTED_MODULE_4__["default"].query().all();
+      return _models_Serie__WEBPACK_IMPORTED_MODULE_3__["default"].query().all();
     },
     allPublishers: function allPublishers() {
-      return _models_Publisher__WEBPACK_IMPORTED_MODULE_5__["default"].query().all();
+      return _models_Publisher__WEBPACK_IMPORTED_MODULE_4__["default"].query().all();
     }
   },
   methods: {
     authorCreate: function authorCreate(event) {
-      console.log("test", event);
-      _models_Author__WEBPACK_IMPORTED_MODULE_3__["default"].$create({
+      _models_Author__WEBPACK_IMPORTED_MODULE_2__["default"].$create({
         data: event
       });
     },
     serieCreate: function serieCreate(event) {
-      console.log("test", event);
-      _models_Serie__WEBPACK_IMPORTED_MODULE_4__["default"].$create({
+      _models_Serie__WEBPACK_IMPORTED_MODULE_3__["default"].$create({
         data: event
       });
     },
     publisherCreate: function publisherCreate(event) {
-      console.log("test", event);
-      _models_Publisher__WEBPACK_IMPORTED_MODULE_5__["default"].$create({
+      _models_Publisher__WEBPACK_IMPORTED_MODULE_4__["default"].$create({
         data: event
       });
     }
@@ -26114,7 +26093,7 @@ var render = function() {
                   on: {
                     click: function($event) {
                       $event.stopPropagation()
-                      _vm.dialog = false
+                      return _vm.cancel($event)
                     }
                   }
                 },

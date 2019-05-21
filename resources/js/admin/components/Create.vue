@@ -21,7 +21,7 @@
 
         <v-btn color="error" @click="reset">Reset Form</v-btn>
 
-        <v-btn color="warning" @click.stop="dialog = false">Cancel</v-btn>
+        <v-btn color="warning" @click.stop="cancel">Cancel</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -29,20 +29,11 @@
 
 <script>
 import { mapGetters } from "vuex";
-import Comic from "../../models/Comic";
-import Author from "../../models/Author";
 
-import Serie from "../../models/Serie";
-import Publisher from "../../models/Publisher";
 export default {
   name: "Create",
   props: {
     modelName: {
-      type: String,
-      required: false
-    },
-
-    table: {
       type: String,
       required: false
     }
@@ -52,8 +43,7 @@ export default {
       dialog: false,
       name: "",
       valid: true,
-      nameRules: [v => !!v || "Name is required"],
-      model: "authors"
+      nameRules: [v => !!v || "Name is required"]
     };
   },
   computed: {},
@@ -75,6 +65,10 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+    cancel() {
+      this.$refs.form.reset();
+      this.dialog = false;
     }
   },
   mounted() {}

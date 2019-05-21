@@ -22,6 +22,7 @@ Route::apiResource('/comics','ComicController');
 Route::apiResource('/authors','AuthorController');
 Route::apiResource('/series','SerieController');
 Route::apiResource('/publishers','PublisherController');
+Route::apiResource('/todos','TodoController');
 Route::post('/login','AuthController@login');
 Route::post('/register','AuthController@register');
 Route::middleware('auth:api')->post('/logout','AuthController@logout');

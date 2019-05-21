@@ -25,7 +25,10 @@ class SerieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newSerie = Serie::create($request->all());
+        
+
+        return response($newSerie);
     }
 
     /**

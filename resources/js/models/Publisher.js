@@ -38,7 +38,7 @@ export default class Publisher extends Model {
           $create: {
             name: 'create',
             http: {
-              url: '',
+              url: '/api/publishers',
               method: 'post',
             },
           },

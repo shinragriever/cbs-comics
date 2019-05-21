@@ -26,7 +26,10 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $newAuthor = Author::create($request->all());
+        
+
+        return response($newAuthor);
     }
 
     /**

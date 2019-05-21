@@ -39,7 +39,7 @@ export default class Author extends Model {
           $create: {
             name: 'create',
             http: {
-              url: '',
+              url: '/api/authors',
               method: 'post',
             },
           },

@@ -1,18 +1,19 @@
-// Serie Model
+// Todo Model
 
 import { Model } from "@vuex-orm/core";
 
 
-export default class Serie extends Model {
+export default class Todo extends Model {
     static get entity () { // <- Define as getter.
-        return 'series'
+        return 'todos'
       }
 
     static fields(){
         return {
             id: this.attr(null),
-           name: this.attr("")
-
+           title: this.attr(""),
+           body: this.attr(""),
+          completed: this.boolean(false)
         }
     }
     static methodConf = {
@@ -24,7 +25,7 @@ export default class Serie extends Model {
           $fetch: {
             name: 'fetch',
             http: {
-              url: '/api/series',
+              url: '/api/todos',
               method: 'get',
             },
           },
@@ -38,7 +39,7 @@ export default class Serie extends Model {
           $create: {
             name: 'create',
             http: {
-              url: '/api/series',
+              url: '',
               method: 'post',
             },
           },

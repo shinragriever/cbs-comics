@@ -13,7 +13,7 @@ export default new Router({
   routes: [
     {
         path: '/admin',
-        name: 'admin',
+        name: 'Admin-Dashboard',
         component: AdminDashboard
     },
     {

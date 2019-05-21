@@ -1,11 +1,11 @@
 <template>
   <v-dialog v-model="dialog" persistent max-width="800px">
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" v-on="on" right>Create Comic</v-btn>
+      <v-icon small class="mr-2" v-on="on">edit</v-icon>
     </template>
     <v-card>
       <v-card-title>
-        <span class="headline primary--text">Create Comic</span>
+        <span class="headline primary--text">Edit Comic</span>
       </v-card-title>
       <v-card-text>
         <v-container grid-list-md>
@@ -98,20 +98,22 @@ export default {
   name: "ComicCreateComponent",
   data() {
     return {
-      newComic: {},
-      comic: {},
+      comic: {
+        id: comic.id,
+        title: comic.title,
+        description: comic.description,
+        author: comic.author.name,
+        serie: comic.serie.name,
+        publisher: comic.publisher.name,
+        publishyear: comic.publishyear,
+        publisher_id: comic.publisher_id,
+        author_id: comic.author_id,
+        serie_id: comic.serie_id,
+        stock: comic.stock,
+        price: comic.price
+      },
       dialog: false,
-      title: "",
-      description: "",
-      author: "",
-      serie: "",
-      publisher: "",
-      publishyear: null,
-      publisher_id: null,
-      author_id: null,
-      serie_id: null,
-      stock: "",
-      price: "",
+
       valid: true,
       priceRules: [v => !!v || "Price is required"],
       stockRules: [v => !!v || "Stock is required"],
@@ -134,14 +136,14 @@ export default {
       seriesErrors: "entities/series/errors",
       publishersErrors: "entities/publishers/errors"
     }),
-    getPublishers() {
-      return Publisher.all();
+    getAuthors() {
+      return Author.query().all();
     },
     getSeries() {
-      return Serie.all();
+      return Serie.query().all();
     },
-    getAuthors() {
-      return Author.all();
+    getPublishers() {
+      return Publisher.query().all();
     }
   },
   created() {},
@@ -159,6 +161,7 @@ export default {
           price: this.price
         };
         console.log(newComic);
+        Comic.$update({ data: newComic });
         this.dialog = false;
         this.$refs.form.reset();
       }

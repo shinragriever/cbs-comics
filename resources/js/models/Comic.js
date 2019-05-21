@@ -51,9 +51,10 @@ export default class Comic extends Model {
             },
           },
           $create: {
+            
             name: 'create',
             http: {
-              url: '',
+              url: '/api/comics',
               method: 'post',
             },
           },

@@ -4,18 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Publisher;
-
-class PublisherController extends Controller
+use App\Todo;
+class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        return $publishers = Publisher::all();
+        return Todo::all();
     }
 
     /**
@@ -26,10 +20,10 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        $newPublisher = Publisher::create($request->all());
+        $newTodo = Todo::create($request->all());
         
 
-        return response($newPublisher);
+        return response($newTodo);
     }
 
     /**
@@ -66,3 +60,4 @@ class PublisherController extends Controller
         //
     }
 }
+

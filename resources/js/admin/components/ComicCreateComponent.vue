@@ -77,7 +77,7 @@
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :disabled="!valid" color="success" @click="submit(comic)">Submit</v-btn>
+        <v-btn :disabled="!valid" color="success" @click="submit()">Submit</v-btn>
 
         <v-btn color="error" @click="reset">Reset Form</v-btn>
 
@@ -134,14 +134,14 @@ export default {
       seriesErrors: "entities/series/errors",
       publishersErrors: "entities/publishers/errors"
     }),
-    getPublishers() {
-      return Publisher.all();
+    getAuthors() {
+      return Author.query().all();
     },
     getSeries() {
-      return Serie.all();
+      return Serie.query().all();
     },
-    getAuthors() {
-      return Author.all();
+    getPublishers() {
+      return Publisher.query().all();
     }
   },
   created() {},
@@ -159,6 +159,7 @@ export default {
           price: this.price
         };
         console.log(newComic);
+        Comic.$create({ data: newComic });
         this.dialog = false;
         this.$refs.form.reset();
       }

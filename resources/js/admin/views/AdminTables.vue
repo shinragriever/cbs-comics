@@ -11,7 +11,11 @@
       <v-layout row wrap>
         <v-flex md4 hover>
           <v-card hover>
-            <v-card-title>Author</v-card-title>
+            <v-card-title>
+              Author
+              <v-spacer></v-spacer>
+              <Create :modelName="author" @create="authorCreate"></Create>
+            </v-card-title>
             <v-data-table
               :headers="headers"
               :items="allAuthors"
@@ -29,7 +33,11 @@
         </v-flex>
         <v-flex md4 hover>
           <v-card hover>
-            <v-card-title>Series</v-card-title>
+            <v-card-title>
+              Series
+              <v-spacer></v-spacer>
+              <Create :modelName="serie" @create="serieCreate"></Create>
+            </v-card-title>
             <v-data-table :headers="headers" :items="allSeries" v-slot:items="props">
               <td>{{ props.item.id }}</td>
               <td class="text-xs-right">{{ props.item.name }}</td>
@@ -42,7 +50,11 @@
         </v-flex>
         <v-flex md4 hover>
           <v-card hover>
-            <v-card-title>Publisher</v-card-title>
+            <v-card-title>
+              Publisher
+              <v-spacer></v-spacer>
+              <Create :modelName="publisher" @create="publisherCreate"></Create>
+            </v-card-title>
             <v-data-table :headers="headers" :items="allPublishers" v-slot:items="props">
               <td>{{ props.item.id }}</td>
               <td class="text-xs-right">{{ props.item.name }}</td>
@@ -62,12 +74,14 @@ import axios from "axios";
 import { mapGetters, mapActions } from "vuex";
 import Comic from "../../models/Comic";
 import Author from "../../models/Author";
-
 import Serie from "../../models/Serie";
 import Publisher from "../../models/Publisher";
+import Create from "../components/Create";
 export default {
   name: "AdminTables",
-  components: {},
+  components: {
+    Create
+  },
   data() {
     return {
       title: "Admin Tables",
@@ -76,6 +90,12 @@ export default {
       meta: null,
       response: "",
       comics: [],
+      author: "Author",
+      authors: "authors",
+      series: "series",
+      publishers: "publishers",
+      serie: "Serie",
+      publisher: "Publisher",
 
       headers: [
         { text: "Id", value: "id" },
@@ -93,6 +113,20 @@ export default {
     },
     allPublishers() {
       return Publisher.query().all();
+    }
+  },
+  methods: {
+    authorCreate(event) {
+      console.log("test", event);
+      Author.$create({ data: event });
+    },
+    serieCreate(event) {
+      console.log("test", event);
+      Serie.$create({ data: event });
+    },
+    publisherCreate(event) {
+      console.log("test", event);
+      Publisher.$create({ data: event });
     }
   }
 };

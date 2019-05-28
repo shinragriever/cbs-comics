@@ -7,10 +7,16 @@ import ComicsTable from '../admin/views/ComicsTable'
 import AuthorsTable from '../admin/views/AuthorsTable'
 import SeriesTable from '../admin/views/SeriesTable'
 import PublishersTable from '../admin/views/PublishersTable'
+import Login from '../admin/auth/Login'
 Vue.use(Router)
 export default new Router({
     mode: 'history',
   routes: [
+    {
+        path: '/login',
+        name: 'login',
+        component: Login
+    },
     {
         path: '/admin',
         name: 'Admin-Dashboard',

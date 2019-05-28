@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SeriesTableSeeder extends Seeder
+class PublishersTableSeeder extends Seeder
 {
 
     /**
@@ -14,13 +14,13 @@ class SeriesTableSeeder extends Seeder
     {
         
 
-        \DB::table('series')->delete();
+        \DB::table('publishers')->delete();
         
-        \DB::table('series')->insert(array (
+        \DB::table('publishers')->insert(array (
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Seven to Eternity',
+                'name' => 'Image',
                 'created_at' => NULL,
                 'updated_at' => NULL,
                 'deleted_at' => NULL,
@@ -28,7 +28,7 @@ class SeriesTableSeeder extends Seeder
             1 => 
             array (
                 'id' => 2,
-                'name' => 'Black Gas',
+                'name' => 'Avatar',
                 'created_at' => NULL,
                 'updated_at' => NULL,
                 'deleted_at' => NULL,
@@ -36,7 +36,7 @@ class SeriesTableSeeder extends Seeder
             2 => 
             array (
                 'id' => 3,
-                'name' => 'Preacher',
+                'name' => 'Vertigo',
                 'created_at' => NULL,
                 'updated_at' => NULL,
                 'deleted_at' => NULL,
@@ -44,9 +44,9 @@ class SeriesTableSeeder extends Seeder
             3 => 
             array (
                 'id' => 4,
-                'name' => 'The Walking Dead',
-                'created_at' => '2019-05-21 15:36:35',
-                'updated_at' => '2019-05-21 15:36:35',
+                'name' => 'DC Comics',
+                'created_at' => '2019-05-21 15:36:45',
+                'updated_at' => '2019-05-21 15:36:45',
                 'deleted_at' => NULL,
             ),
         ));

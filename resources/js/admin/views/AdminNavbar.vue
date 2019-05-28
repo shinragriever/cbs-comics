@@ -65,7 +65,8 @@ export default {
 
         { icon: "table_chart", text: "Tables", route: "/admin/tables" },
         { icon: "table_chart", text: "comics", route: "/admin/tables/comics" },
-        { icon: "person", text: "Profile", route: "/profile" }
+        { icon: "person", text: "Profile", route: "/profile" },
+        { icon: "person", text: "Login", route: "/login" }
       ]
     };
   }

@@ -13,7 +13,7 @@ Vue.use(Vuex);
 VuexORM.use(VuexORMAxios, {
     database,
     http: {
-        baseURL: 'http://cbs.store',
+        baseURL: '',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'

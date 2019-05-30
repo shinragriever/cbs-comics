@@ -65,6 +65,8 @@ class SerieController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $serie = Serie::findOrFail($id);
+        
+        $serie->delete();
     }
 }

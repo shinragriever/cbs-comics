@@ -16,6 +16,8 @@ export default class Author extends Model {
 
         }
     }
+  
+    
     static methodConf = {
         http: {
             url: '',
@@ -53,7 +55,7 @@ export default class Author extends Model {
           $delete: {
             name: 'delete',
             http: {
-              url: '/:id',
+              url: '/api/authors/:id',
               method: 'delete',
             },
           },

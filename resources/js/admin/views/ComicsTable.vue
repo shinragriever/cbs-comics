@@ -70,6 +70,8 @@ export default {
     };
   },
   computed: {
+    
+  
     comics() {
       return Comic.query()
         .withAll()

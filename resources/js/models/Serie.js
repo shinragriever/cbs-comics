@@ -45,14 +45,14 @@ export default class Serie extends Model {
           $update: {
             name: 'update',
             http: {
-              url: '/api/publishers/:id',
+              url: '/api/series/:id',
               method: 'put',
             },
           },
           $delete: {
             name: 'delete',
             http: {
-              url: '/:id',
+              url: '/api/series/:id',
               method: 'delete',
             },
           },

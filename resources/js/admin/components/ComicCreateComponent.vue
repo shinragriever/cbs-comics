@@ -29,8 +29,10 @@
                   v-model="author_id"
                   label="Author*"
                   :items="getAuthors"
+                  :rules="authorRules"
                   item-text="name"
                   item-value="id"
+                  required
                 ></v-select>
               </v-flex>
               <v-flex xs6>
@@ -38,8 +40,10 @@
                   v-model="serie_id"
                   label="Series*"
                   :items="getSeries"
+                  :rules="serieRules"
                   item-text="name"
                   item-value="id"
+                  required
                 ></v-select>
               </v-flex>
             </v-layout>
@@ -49,8 +53,10 @@
                   v-model="publisher_id"
                   label="Publisher*"
                   :items="getPublishers"
+                  :rules="publisherRules"
                   item-text="name"
                   item-value="id"
+                  required
                 ></v-select>
               </v-flex>
               <v-flex xs6>
@@ -81,7 +87,7 @@
 
         <v-btn color="error" @click="reset">Reset Form</v-btn>
 
-        <v-btn color="warning" @click.stop="dialog = false">Cancel</v-btn>
+        <v-btn color="warning" @click.stop="cancel">Cancel</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -106,21 +112,26 @@ export default {
       author: "",
       serie: "",
       publisher: "",
-      publishyear: null,
-      publisher_id: null,
-      author_id: null,
-      serie_id: null,
+      publishyear: "",
+      publisher_id: "",
+      author_id: "",
+      serie_id: "",
       stock: "",
       price: "",
       valid: true,
-      priceRules: [v => !!v || "Price is required"],
-      stockRules: [v => !!v || "Stock is required"],
-      publishRules: [v => !!v || "Publisher Year is required"],
-      descriptionRules: [v => !!v || "Description is required"],
-      titleRules: [
+       titleRules: [
         v => !!v || "Name is required",
         v => (v && v.length <= 255) || "Name must be less than 255 characters"
-      ]
+      ],
+      descriptionRules: [v => !!v || "Description is required"],
+      authorRules: [v => !!v || "Author is required"],
+      serieRules: [v => !!v || "Serie is required"],
+      publisherRules: [v => !!v || "Publisher Year is required"],      
+      priceRules: [v => !!v || "Price is required"],
+      publishRules: [v => !!v || "Publisher Year is required"], 
+      stockRules: [v => !!v || "Stock is required"],
+      
+     
     };
   },
   computed: {
@@ -147,7 +158,10 @@ export default {
   created() {},
   methods: {
     submit() {
+      console.log("test");
+      console.log(this.publisher_id);
       if (this.$refs.form.validate()) {
+        
         const newComic = {
           title: this.title,
           description: this.description,
@@ -156,7 +170,8 @@ export default {
           author_id: this.author_id,
           serie_id: this.serie_id,
           stock: this.stock,
-          price: this.price
+          price: this.price,
+          
         };
         console.log(newComic);
         Comic.$create({ data: newComic });
@@ -169,6 +184,10 @@ export default {
     },
     resetValidation() {
       this.$refs.form.resetValidation();
+    },
+     cancel() {
+      this.$refs.form.reset();
+      this.dialog = false;
     }
   },
   mounted() {}

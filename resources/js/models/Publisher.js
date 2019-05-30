@@ -52,7 +52,7 @@ export default class Publisher extends Model {
           $delete: {
             name: 'delete',
             http: {
-              url: '/:id',
+              url: '/api/publishers/:id',
               method: 'delete',
             },
           },

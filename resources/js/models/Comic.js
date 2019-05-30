@@ -68,7 +68,7 @@ export default class Comic extends Model {
           $delete: {
             name: 'delete',
             http: {
-              url: '/:id',
+              url: '/api/comics/:id',
               method: 'delete',
             },
           },

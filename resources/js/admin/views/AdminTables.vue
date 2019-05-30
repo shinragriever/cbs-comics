@@ -26,7 +26,7 @@
               <td class="text-xs-right">{{ props.item.name }}</td>
               <td class="justify-center layout px-0">
                 <EditComponent :modelName="author" :item="props.item"  @update="authorEdit"></EditComponent>
-                <v-icon small @click="deleteItem(props.item)">delete</v-icon>
+                <v-icon small @click="authorDelete(props.item)">delete</v-icon>
               </td>
             </v-data-table>
           </v-card>
@@ -43,7 +43,7 @@
               <td class="text-xs-right">{{ props.item.name }}</td>
               <td class="justify-center layout px-0">
                 <EditComponent :modelName="serie" :item="props.item"  @update="serieEdit"></EditComponent>
-                <v-icon small @click="deleteItem(props.item)">delete</v-icon>
+                <v-icon small @click="serieDelete(props.item)">delete</v-icon>
               </td>
             </v-data-table>
           </v-card>
@@ -60,7 +60,7 @@
               <td class="text-xs-right">{{ props.item.name }}</td>
               <td class="justify-center layout px-0">
                 <EditComponent :modelName="publisher" :item="props.item" @update="publisherEdit"></EditComponent>
-                <v-icon small @click="deleteItem(props.item)">delete</v-icon>
+                <v-icon small @click="publisherDelete(props.item)">delete</v-icon>
               </td>
             </v-data-table>
           </v-card>
@@ -75,6 +75,7 @@ import { mapGetters, mapActions } from "vuex";
 import Author from "../../models/Author";
 import Serie from "../../models/Serie";
 import Publisher from "../../models/Publisher";
+import Comic from "../../models/Comic";
 import Create from "../components/Create";
 import EditComponent from "../components/EditComponent";
 export default {
@@ -106,7 +107,8 @@ export default {
     },
     allPublishers() {
       return Publisher.query().all();
-    }
+    },
+    
   },
   methods: {
     authorCreate(data) {
@@ -127,6 +129,32 @@ export default {
     publisherEdit(data){ 
       Publisher.$update({params: {id:data.id},  data: {name: data.name} });
     },
+    authorDelete(data){
+    const authorid = data.id;
+     Author.$delete({params: {id:data.id} });
+     console.log("test1",data.id);
+    const comics = Comic.query().where('author_id', authorid).get();
+    console.log(comics);
+    },
+    serieDelete(data){
+      Serie.$delete({params: {id:data.id} });
+      Comic.delete({
+            where (data) {
+          return serie_id === data.id
+        }
+      })
+    },
+    publisherDelete(data){ 
+      Publisher.$delete({params: {id:data.id} });
+       Comic.delete({
+            where (data) {
+          return publisher_id === data.id
+          
+        }
+      })
+    },
+    
+
   }
 };
 </script>
